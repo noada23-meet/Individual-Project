@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="static/css/product_style.css">
+    <meta charset="UTF-8">
+    <title>Product page!</title>
+    <h1>hey there! and welcome to our product page
+
+    <br>
+    
+
+
+</head>
+<body>
+    <div id="app">
+    <header>
+        <div class="container alignment-container">
+        <div class="logo">
+            <h1 class="logo__title"><a class="logo__title-link" href="#" @click.prevent="goToHomePage">hiking<br>site</a></h1>
+        </div>
+        <div class="cart-header-info">
+            <span class="cart-header-info__text">this is your profile</span>
+            <a href="/cart" type="button" class="cart-header-info__link" @click.prevent="displayCartView">your profile</a>
+         </div>
+        </div>
+    <!-- container -->
+        <div class="hero">
+        <div class="container">
+            <h2 class="display-title">
+          travel all over the world  with us!
+            </h2>
+
+        </div>
+        </div>
+    </header>
+    <main>
+        <h2 class="page-title">recommended traveling sits</h2>
+        <div v-if="!isCartView" class="container products-container">
+        <div class="prod-card" v-for="product in products">
+            <img :src="product.imgSrc" alt="" class="prod-card__image">
+            <div class="prod-card__info">
+            <h4 class="prod-card__title">ben shemen forest</h4>
+            <p class="prod-card__description">Discover this 10.8-km loop trail near Beit Nehemya, Central District HaMerkaz. Generally considered a moderately challenging route, it takes an average of 2 h 48 min to complete. This is a very popular area for mountain biking and trail running, so you'll likely encounter other people while exploring.</p>
+            <div class="alignment-container">
+
+            </div>
+          <!--/.alignment-container -->
+
+
+
+        <div v-else class="container">
+      <!-- cart view -->
+        <table v-if="cartItems.length > 0" class="cart">
+            <thead>
+            <tr>
+
+            </tr>
+            </thead>
+            <tbody>
+             <tr v-for="prod in cartItems">
+                
+            
+            </tr>
+            <tr class="cart__total">
+                <td colspan="2"></td>
+                
+             </tr>
+             <tr>
+             <td colspan="2"></td>
+                
+            </tr>
+            </tbody>
+        </table>
+      
+        <div v-else class="empty-cart">
+
+        </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container alignment-container">
+        <ul class="footer-links">
+            <li class="footer-links__list-item">
+             <a href="/about" class="footer-links__link">About</a>
+            </li>
+            <li class="footer-links__list-item">
+            <a href="/home" class="footer-links__link">home page</a>
+            </li>
+
+         </ul>
+
+        <p class="footer-credits">&copy;2018 Maria Antonietta Perna</p>
+        </div>
+    </footer>
+    </div>
+</body>
+</html>

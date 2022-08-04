@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css?family=Bevan|Raleway:300i,400,700,800');
+
+// vars
+$body-color: #333;
+$main-color: #41b883;
+$secondary-color: #35495e;
+$tertiary-color: #cc4513;
+
+// mixins
+@mixin flex-container($xalign, $yalign) {
+  display: flex;
+  justify-content: $xalign;
+  align-items: $yalign;
+}
+
+@mixin action-btn {
+  background-color: transparent;
+  border: 2px solid $secondary-color;
+  border-radius: 5px;
+  color: $secondary-color;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  transition: all 0.3s ease-out;
+  
+  &:hover,
+  &:focus {
+    background-color: $tertiary-color;
+    border: 3px solid darken($tertiary-color, 15%) inset;
+    color: #fff;
+    transform: translatey(-3px);
+    box-shadow: 0 3px 2px rgba(0,0,0,.5);
+  }
+}
+
+@mixin disabled-btn {
+  color: lighten($secondary-color, 45%);
+  border-color: lighten($secondary-color, 45%);
+  background-color: transparent;
+
+  
+  &:disabled:hover,
+  &:disabled:focus {
+    background-color: transparent;
+    transform: none;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+}
+
+// general
+* {
+  box-sizing: border-box;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size:1.6rem;
+  line-height: 1.7;
+  color: $body-color;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+// reusable styles
+.container {
+  width: 100%;
+  max-width: 992px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.alignment-container {
+  @include flex-container(space-between, center);  
+}
+
+.display-title {
+  font-size: 2.8rem;
+}
+
+.page-title {
+  margin-bottom: 0;
+  font-size: 2.8rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+// layout
+header .alignment-container {
+  border-bottom: 2px dashed $secondary-color;
+}
+
+footer {
+  margin-top: 2em;
+  border-top: 2px dashed $secondary-color;
+}
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-column-gap: 1em;
+  grid-row-gap: 2em;
+}
+
+// components
+.logo {
+  margin-right: 1em;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: $main-color;
+}
+.logo__title,
+.logo__title-link {
+  font-family: 'Bevan', cursive;
+}
+
+.logo__title-link {
+  text-decoration: none;
+  color: $main-color;
+}
+
+// shopping cart in products page
+.cart-header-info__text,
+.cart-header-info__link {
+  display: inline-block;
+}
+
+.cart-header-info__text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.cart-header-info__link {
+  text-decoration: none;
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: $secondary-color;
+  background-color: lighten($secondary-color, 5%);
+  transition: all 0.3s ease-out;
+  
+  &:hover,
+  &:focus {
+    background-color: $secondary-color;
+    font-weight: bold;
+    box-shadow: 0 3px 2px rgba(0,0,0,.5);
+    transform: translatey(-3px);
+    border: 2px solid darken($main-color, 25%) inset;
+  }
+}
+
+// shopping cart in cart page
+.cart {
+  width: 100%;
+  border-collapse: collapse;
+  
+  tbody tr:nth-child(odd) {
+    background-color: lighten($main-color, 30%);
+  }
+  tbody td {
+    text-align: center;
+    padding: 1em;
+  }
+  
+  .cart__total {
+    background-color: $secondary-color;
+    color: #fff;
+  }
+  
+  .cart__add-qty,
+  .cart__remove-qty {
+    width: 30px;
+    height: 30px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 0.5em;
+    text-align: center;
+    border-radius: 3px;
+    background-color: $tertiary-color;
+    border: darken($tertiary-color, 15%);
+    color: #fff;
+    
+    &:disabled {
+      @include disabled-btn;
+    }
+  }
+  
+  .cart__qty-text {
+    margin-right: 3px;
+    font-weight: 700;
+  }
+  
+  .cart__checkout-btn {
+    @include action-btn;
+  }
+}
+
+// hero block
+.hero {
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(126,213,111, .5),
+    rgba(40,180,133, .5)),
+  url(https://images.unsplash.com/photo-1463320726281-696a485928c7?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&ixid=eyJhcHBfaWQiOjE0NTg5fQ&s=d9c9cea1805c99c465dbe9ee3ecbfd34);
+ background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  text-align: center;
+  color: #fff;
+  border-bottom: 3px dashed $secondary-color;
+  @include flex-container(center, center);
+  height: 45vh;
+}
+
+.hero__btn {
+  @include action-btn;
+  @media (min-width: 600px) {
+    font-size: 3rem;
+  }
+}
+
+// cards with products
+.prod-card__image {
+  border: 2px solid $tertiary-color;
+  border-radius: 3px;
+  padding: 1em;
+  filter: sepia(40%) contrast(200%) opacity(85%);
+  transition: filter 0.3s;
+}
+
+.prod-card:hover .prod-card__image {
+  filter: none; 
+}
+
+.prod-card__info {
+  padding: 1em;
+  line-height: 1;
+}
+
+.prod-card__title {
+  font-size: 2rem;
+  color: $secondary-color;
+}
+
+.prod-card__description {
+  line-height: 1.5;
+}
+
+.prod-card__price,
+.prod-card__in-stock {
+  background-color: $main-color;
+  color: #fff;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+.not-in-stock {
+  background-color: $tertiary-color;
+}
+
+.prod-card__btn {
+  @include action-btn;
+  
+  &:disabled {
+    @include disabled-btn;
+  }
+}
+
+.empty-cart {
+  background-color: $secondary-color;
+  color: #fff;
+  text-align: center;
+  font-size: 2.6rem;
+}
+
+// footer components
+.footer-links {
+  font-size: 1.4rem;
+}
+
+.footer-links__link {
+  color: $main-color;
+  
+  &:hover,
+  &:focus {
+    color: $secondary-color;
+  }
+}
+
+.footer-credits {
+  font-size: 1.5rem;
+}
